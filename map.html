@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/iVizCharts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chartsUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/china.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="test" style="width: 800px;height: 500px;"></div>
+		<script type="text/javascript">
+			var option = {
+				title:{
+					text:'a simple map'
+				},
+				legend:{
+					data:['item'],
+					left:'right',
+					top:'5%'
+				},
+				//
+			    visualMap: {
+			        min: 0,
+			        splitNumber:5,
+			        max: 200,
+			        color:['#d94e5d','#999','#ccc'],
+			        left:'20'
+			    },
+			    series: [
+			        {
+			            name: 'item',
+			            data:[
+			                {name:'广东',value:33},
+			                {name:'陕西',value:44},
+			                {name:'澳门',value:55},
+			                {name:'青岛',value:66},
+			                {name:'内蒙古',value:77},
+			                {name:'宁夏',value:99},
+			                {name:'山东',value:124},
+			                {name:'山西',value:22},
+			                {name:'天津',value:168},
+			                {name:'北京',selected:true,value:130},
+			                {name:'上海',value:196},
+			                {name:'重庆',value:99}
+			            ]
+			        }
+			    ]
+			}
+			//实例化一个地图
+			var myPieMap = iVizCharts.map(document.getElementById('test'),option);
+		</script>
+	</body>
+</html>
+
+
+
+
+
+

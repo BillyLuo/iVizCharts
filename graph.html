@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/iVizCharts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chartsUtil.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="test" style="width: 800px;height: 500px;"></div>
+		<script type="text/javascript">
+			var option = {
+			    title: {
+			        text: 'Graph 简单示例',
+			        left:'center'
+			    },
+			    tooltip: {},
+			    animationDurationUpdate: 1500,
+			    animationEasingUpdate: 'quinticInOut',
+			    series : [
+			        {
+			            type: 'graph',
+			            layout: 'none',
+			            symbolSize: 50,
+			            roam: true,
+			            label: {
+			                normal: {
+			                    show: true
+			                }
+			            },
+			            edgeSymbol: ['circle', 'arrow'],
+			            edgeSymbolSize: [4, 10],
+			            edgeLabel: {
+			                normal: {
+			                    textStyle: {
+			                        fontSize: 20
+			                    }
+			                }
+			            },
+			            data: [{
+			                name: '节点1',
+			                x: 300,
+			                y: 300
+			            }, {
+			                name: '节点2',
+			                x: 800,
+			                y: 300
+			            }, {
+			                name: '节点3',
+			                x: 550,
+			                y: 100
+			            }, {
+			                name: '节点4',
+			                x: 550,
+			                y: 500
+			            }],
+			            // links:节点间的关系数据
+			            links: [{
+			                source: 0,
+			                target: 1,
+			                symbolSize: [5, 20],
+			                label: {
+			                    normal: {
+			                        show: true
+			                    }
+			                },
+			                lineStyle: {
+			                    normal: {
+			                        width: 5,
+			                        curveness: 0.2
+			                    }
+			                }
+			            }, {
+			                source: '节点2',
+			                target: '节点1',
+			                label: {
+			                    normal: {
+			                        show: true
+			                    }
+			                },
+			                lineStyle: {
+			                    normal: { curveness: 0.2 }
+			                }
+			            }, {
+			                source: '节点1',
+			                target: '节点3'
+			            }, {
+			                source: '节点2',
+			                target: '节点3'
+			            }, {
+			                source: '节点2',
+			                target: '节点4'
+			            }, {
+			                source: '节点1',
+			                target: '节点4'
+			            }],
+			            lineStyle: {
+			                normal: {
+			                    opacity: 0.9,
+			                    width: 2,
+			                    curveness: 0
+			                }
+			            }
+			        }
+			    ]
+			};
+			//实例化一个关系图
+			var myPieMap = iVizCharts.graph(document.getElementById('test'),option);
+		</script>
+		<input type="range" min="0" max="1000" step="1" id="range" value="0" style="width: 500px;display: block;"/><span id="show">0</span>
+	</body>
+</html>
+
+<script type="text/javascript">
+	var x = 0;
+	var show = document.getElementById('show');
+	function add () {
+		x += 1;
+		if(x>1000){
+			return ;
+		}
+		range.value = x;
+		show.innerHTML = x/10 +'%';
+		requestAnimationFrame(add);
+	}
+	show.onclick = function () {
+		requestAnimationFrame(add);
+	}
+</script>
+
+
+
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/iVizCharts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chartsUtil.js" type="text/javascript" charset="utf-8"></script>
+		<script src="theme/shine.js"></script>
+	</head>
+	<body>
+		<div id="test" style="width: 1000px;height: 600px;"></div>
+		
+		<script type="text/javascript">
+		//实例化一个柱状图表
+		var myBar = iVizCharts.bar(document.getElementById('test'),{
+				title:{
+					text:'this is a bar Map'
+				},
+				legend: {
+					//使用图例时，此处的data须和series中的name值对应。
+			        data: ['item1','item2','item3','item4','item5','item6'],
+			        
+			 	},
+			 	//x轴
+			 	xAxis:{
+			 		name:'月份',
+			 		data:['一月','二月','三月','四月','五月','六月']
+			 	},
+			 	yAxis:{
+			 		name:'销量'
+			 	},
+			 	//核心数据，如果有legend组件的话，name需要和legend中的data对应
+				series:[
+					{
+						name:'item1',
+						data:[4,2,6,4,3,6]
+					},
+					{
+						name:'item2',
+						data:[2,5,2,3,6,7]
+					},
+					{
+						name:'item3',
+						data:[6,3,6,8,3,3]
+					},
+					{
+						name:'item4',
+						data:[4,2,6,4,8,4]
+					},
+					{
+						name:'item5',
+						data:[2,5,2,3,2,8]
+					},
+					{
+						name:'item6',
+						data:[6,3,6,8,6,2]
+					}
+				]
+		},'shine');
+		</script>
+	</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/iVizCharts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chartsUtil.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+		<div id="test" style="width: 800px;height: 600px;"></div>
+		
+		<script type="text/javascript">
+			var option = {
+			    series: [
+			        {
+			            name: '业务量',
+			            title:{
+			            	textStyle:{
+			            		color:'#333',
+			            		fontSize:20
+			            	}
+			            },
+			            //添加标注
+			            markPoint:{
+			            	symbol:'circle',
+			            	symbolSize:[100,50],
+			            	label:{
+			            		normal:{
+			            			show:true,
+			            			position:'inside',
+			            			formatter:'{b}',
+			            			textStyle:{
+			            				color:'#fff',
+			            				fontSize:24
+			            			}
+			            		}
+			            	},
+			            	data:[
+			            		{
+			            			name:'item',
+			            			x:300,
+			            			y:300,
+			            			value:'hello'
+			            		},
+			            		{
+			            			name:'item2',
+			            			x:100,
+			            			y:100,
+			            			value:'world'
+			            		}
+			            	]
+			            },
+			            axisTick:{
+			            	splitNumber:10
+			            },
+			            detail: {formatter:'{value}%'},
+			            data: [{value: 0, name: '完成率'}]
+			        }
+			    ]
+			};
+			var myGuage = iVizCharts.gauge(document.getElementById('test'),option);
+			var x = 1;
+			var timer = setInterval(function (){
+				x = (10*x+2)/10
+				if(x >= 100){
+					x = 0;
+				}
+			    option.series[0].data[0].value = x ;
+				myGuage.setOption(option,true)
+			},200);
+		</script>
+	</body>
+</html>
