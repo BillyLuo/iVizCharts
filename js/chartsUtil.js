@@ -450,4 +450,25 @@
 		myChart.setOption(option);
 		return myChart;
 	}
+	
+	//treemap(树状图);
+	iViz.treemap = function (container,option,theme) {
+		var myTheme = theme || 'default';
+		var myChart = iViz.init(container,myTheme);
+		var defaultOption = {
+			series:[]
+		};
+		if(option.series) {
+			for(var seriesItem in option.series) {
+				option.series[seriesItem].type = 'treemap';
+			}
+		}else {
+			console.log('warning!series did not exist.');
+		}
+		if(option) {
+			myChart.setOption(defaultOption);
+		}
+		myChart.setOption(option);
+		return myChart;
+	}
 })()
