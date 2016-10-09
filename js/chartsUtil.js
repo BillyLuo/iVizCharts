@@ -16,7 +16,7 @@
 		left:40,
 		feature:{
 			magicType:{
-				type:['line','bar']
+				type:['line','bar','stack','tiled']
 			}
 		}
 	}
@@ -309,6 +309,47 @@
 	           			borderColor:'#f00'
 	           		}
 	           	}
+			}
+		}else {
+			console.log('series can not be find');
+		}
+		
+		var myTheme = theme || 'default';
+		var myChart = iViz.init(container,myTheme);
+		if(option){
+			myChart.setOption(defaultOption);
+			myChart.setOption(option);
+		}else{
+			console.log('option can not be find');
+		}
+		return myChart;
+	}
+	//effectScatter(气泡图);
+	iViz.effectScatter = function (container,option,theme) {
+		var defaultOption = {
+			title:myTitle,
+		    tooltip : {
+		    	trigger:'item'
+		    },
+		    itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+       		},
+		    series : []
+		}
+		if(option.series){
+			for(var prop in option.series){
+				//设置series里面第一组数据的类型为effecScatter（散点图）；
+				option.series[prop].map = 'china';
+				//设置是否可以缩放
+				option.series[prop].roam = true,
+				option.series[prop].scaleLimit = {
+					min:1
+				}
+				option.series[0].type = 'effectScatter';
 			}
 		}else {
 			console.log('series can not be find');
