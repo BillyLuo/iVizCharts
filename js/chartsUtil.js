@@ -1,22 +1,43 @@
 //version:0.1
-//图表类型(bar(柱形),line(折线),pie(饼图),scatter(散点图),map(地图),radar(雷达图),graph(关系图),funnel(漏斗图),gauge(仪表盘图),heatmap(热力图));
+//图表类型(bar(柱形),line(折线),pie(饼图),scatter(散点图),map(地图),radar(雷达图),graph(关系图),funnel(漏斗图),gauge(仪表盘图),heatmap(热力图),candlestick(k线图));
 (function () {
 	//图表核心js(iVizCharts.js)，必须在这之前引入
 	var iViz = iVizCharts;
 	//一些图表对象的公共属性，可以自行配置
 	var myTitle = {
 		//标题的位置
-		left:'center'
+		left:'center',
+		//主标题和副标题之间的距离，单位是px
+		itemGap:6
 	}
-	var myGrid = {
-		//网格
-        right: '10%',
-        bottom: '3%',
-        containLabel: true
+	var myToolBox = {
+		show:true,
+		orient:'horizontal',
+		left:40,
+		feature:{
+			magicType:{
+				type:['line','bar']
+			}
+		}
 	}
-	
+	var myxAxis = {};
+	//解决x坐标轴名称过长的问题
+	myxAxis.setxAxisNameGap = function (name) {
+		if(name.length<=4){
+			return 10;
+		}else {
+			return 30;
+		}
+	}
+	myxAxis.setxAxisNameLocation = function (name) {
+		if(name.length<=4){
+			return 'end';
+		}else {
+			return 'middle';
+		}
+	}
 	//自定义的方法参数说明：
-	//1.必须参数，container(element对象，图表的容器)，option(object，图表数据核心对象)
+	//1.必须参数，container(element，图表的容器)，option(object，图表数据核心对象)
 	//2.可选参数   theme(string，图表主题，使用时必须先引入相应theme的js文件)
 	
 	//图表方法说明：
@@ -26,14 +47,16 @@
 	
 	//bar(柱状图)
 	iViz.bar = function (container,option,theme) {
+		console.log(myToolBox);
 		var defaultOption = {
 			title:myTitle,
+			toolbox:myToolBox,
 			//图例
 			legend:{
 				data:[],
 				orient:'horizontal',
-				top:35,
-			    right:'10%'
+				top:38,
+			    right:'5%'
 			},
 		    tooltip : {
 		        trigger: 'axis',
@@ -41,24 +64,19 @@
 		            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
 		        }
 		    },
-		    grid: myGrid,
 		    //x轴数据
-		    xAxis : [
-		        {
-		            type : 'category',
-		            data:[],
-		            axisTick: {
-		                alignWithLabel: true
-		            }
-		        }
-		    ],
+		    xAxis : {
+			            type : 'category',
+			            data:[],
+			            axisTick: {
+			                alignWithLabel: true
+			            }
+			       },
 		    //y轴数据
-		    yAxis : [
-		        {
-		            type : 'value',
-		            data:[]
-		        }
-		    ],
+		    yAxis : {
+			            type : 'value',
+			            data:[]
+			        },
 		    //核心数据
 		    series : []
 		}
@@ -74,6 +92,10 @@
 		if(option){
 			//初始化图表
 			myChart.setOption(defaultOption);
+			if(option.xAxis.name){
+				option.xAxis.nameGap = myxAxis.setxAxisNameGap(option.xAxis.name);
+				option.xAxis.nameLocation = myxAxis.setxAxisNameLocation(option.xAxis.name);
+			}
 			//根据传入的数据刷新图表
 			myChart.setOption(option);
 		}else{
@@ -88,6 +110,7 @@
 	iViz.line = function (container,option,theme) {
 			var defaultOption = {
 			title:myTitle,
+			toolbox:myToolBox,
 		    tooltip : {
 		        trigger: 'axis'
 		    },
@@ -96,7 +119,6 @@
 				left:'right',
 				orient:'vertical'
 			},
-		    grid: myGrid,
 		    xAxis : [
 		        {
 		            type : 'category',
@@ -126,6 +148,10 @@
 		var myChart = iViz.init(container,myTheme);
 		if(option){
 			myChart.setOption(defaultOption);
+			if(option.xAxis.name){
+				option.xAxis.nameGap = myxAxis.setxAxisNameGap(option.xAxis.name);
+				option.xAxis.nameLocation = myxAxis.setxAxisNameLocation(option.xAxis.name);
+			}
 			myChart.setOption(option);
 		}else{
 			console.log('option can not be find')
@@ -467,8 +493,8 @@
 		}
 		if(option) {
 			myChart.setOption(defaultOption);
+			myChart.setOption(option);
 		}
-		myChart.setOption(option);
 		return myChart;
 	}
 })()

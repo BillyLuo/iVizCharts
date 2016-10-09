@@ -15,7 +15,8 @@
 		//实例化一个柱状图表
 		var myBar = iVizCharts.bar(document.getElementById('test'),{
 				title:{
-					text:'this is a bar Map'
+					text:'this is a bar chart',
+					subtext:'这里是副标题，可以添加链接（sublink）'
 				},
 				legend: {
 					//使用图例时，此处的data须和series中的name值对应。
@@ -34,7 +35,7 @@
 				series:[
 					{
 						name:'item1',
-						data:[4,2,6,4,3,6]
+						data:[4,2,6,2,3,6]
 					},
 					{
 						name:'item2',
