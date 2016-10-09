@@ -10,21 +10,25 @@
 	</head>
 
 	<body>
-		<div id="test" style="width: 1000px;height: 700px;"></div>
+		<div id="test" style="width: 800px;height: 600px;"></div>
 		<script type="text/javascript">
 			var data = [{
 				name: '海门',
 				value: 9
-			}, {
+			}, 
+			{
 				name: '鄂尔多斯',
 				value: 12
-			}, {
+			}, 
+			{
 				name: '招远',
 				value: 12
-			}, {
+			}, 
+			{
 				name: '舟山',
 				value: 12
-			}, {
+			}, 
+			{
 				name: '齐齐哈尔',
 				value: 14
 			}, {
@@ -789,14 +793,12 @@
 				}
 				return res;
 			};
-
 			var option = {
 				backgroundColor: '#404a59',
 				title: {
 					text: '全国主要城市空气质量',
 					subtext: 'data from PM25.in',
 					sublink: 'http://www.pm25.in',
-					left: 'center',
 					textStyle: {
 						color: '#fff'
 					}
@@ -806,8 +808,8 @@
 				},
 				legend: {
 					orient: 'vertical',
-					y: 'bottom',
-					x: 'right',
+					y: 20,
+					right: 40,
 					data: ['pm2.5'],
 					textStyle: {
 						color: '#fff'
@@ -841,7 +843,7 @@
 					coordinateSystem: 'geo',
 					data: convertData(data.sort(function(a, b) {
 						return b.value - a.value;
-					}).slice(0, 6)),
+					}).slice(0, 5)),
 					symbolSize: function(val) {
 						return val[2] / 10;
 					},

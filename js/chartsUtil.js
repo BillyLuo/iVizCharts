@@ -47,7 +47,6 @@
 	
 	//bar(柱状图)
 	iViz.bar = function (container,option,theme) {
-		console.log(myToolBox);
 		var defaultOption = {
 			title:myTitle,
 			toolbox:myToolBox,
@@ -81,8 +80,16 @@
 		    series : []
 		}
 		if(option.series){
-			for(var prop in option.series){
-				option.series[prop].type = 'bar'
+			option.legend = {};
+			option.legend.data = [];
+			var series = option.series;
+			for(var prop in series){
+				if(!series[prop]['name']){
+					console.log("can not find option.series[" +prop+ "].name");
+				}else{
+					option.legend.data.push(series[prop]["name"]);
+				}
+				series[prop].type = 'bar'
 			}
 		}else{
 			console.log('can not find series')
@@ -133,15 +140,20 @@
 		    ],
 		    series : []
 		}
-		for(var prop in defaultOption){
-			defaultOption.series[prop] = 'line'
-		}
 		if(option.series){
-			for(var prop in option.series){
-				option.series[prop].type = 'line'
+			option.legend = {};
+			option.legend.data = [];
+			var series = option.series;
+			for(var prop in series){
+				if(!series[prop]['name']){
+					console.log("can not find option.series[" +prop+ "].name");
+				}else{
+					option.legend.data.push(series[prop]["name"]);
+				}
+				series[prop].type = 'line'
 			}
-		}else {
-			console.log('option.series can not find');
+		}else{
+			console.log('can not find series')
 		}
 		
 		var myTheme = theme || 'default';
@@ -271,7 +283,6 @@
 	iViz.map = function (container,option,theme) {
 		var defaultOption = {
 			title:myTitle,
-			grid: myGrid,
 		    tooltip : {
 		    	trigger:'item'
 		    },
@@ -338,23 +349,26 @@
                     shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
        		},
+   			tooltip: {
+				trigger: 'item'
+			},
 		    series : []
 		}
 		if(option.series){
-			for(var prop in option.series){
+			var series = option.series;
+			for(var prop in series){
 				//设置series里面第一组数据的类型为effecScatter（散点图）；
-				option.series[prop].map = 'china';
+				series[prop].map = 'china';
 				//设置是否可以缩放
-				option.series[prop].roam = true,
-				option.series[prop].scaleLimit = {
+				series[prop].roam = true,
+				series[prop].scaleLimit = {
 					min:1
 				}
-				option.series[0].type = 'effectScatter';
+				series[0].type = 'effectScatter';
 			}
 		}else {
 			console.log('series can not be find');
 		}
-		
 		var myTheme = theme || 'default';
 		var myChart = iViz.init(container,myTheme);
 		if(option){
