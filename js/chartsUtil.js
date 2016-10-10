@@ -112,10 +112,10 @@
 		if(option){
 			//初始化图表
 			myChart.setOption(defaultOption);
-			if(!option.xAxis.nameGap){
+			if(!option.xAxis.nameGap && option.xAxis.name){
 				option.xAxis.nameGap = myxAxis.setxAxisNameGap(option.xAxis.name);
 			}
-			if(!option.xAxis.nameLocation){
+			if(!option.xAxis.nameLocation && option.xAxis.name){
 				option.xAxis.nameLocation = myxAxis.setxAxisNameLocation(option.xAxis.name);
 			}
 			//根据传入的数据刷新图表
@@ -176,10 +176,10 @@
 		var myChart = iViz.init(container,myTheme);
 		if(option){
 			myChart.setOption(defaultOption);
-			if(!option.xAxis.nameGap){
+			if(!option.xAxis.nameGap && option.xAxis.name){
 				option.xAxis.nameGap = myxAxis.setxAxisNameGap(option.xAxis.name);
 			}
-			if(!option.xAxis.nameLocation){
+			if(!option.xAxis.nameLocation && option.xAxis.name){
 				option.xAxis.nameLocation = myxAxis.setxAxisNameLocation(option.xAxis.name);
 			}
 			myChart.setOption(option);
