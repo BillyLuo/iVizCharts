@@ -14,10 +14,10 @@
 		<script type="text/javascript">
 		//实例化一个柱状图表
 		var data = {
-			item1:[4,2,6,2,3,6],
+			item1:[4,3,6,2,3,6],
 			item2:[2,5,2,3,6,7],
-			item3:[4,2,6,2,3,6],
-			item4:[2,5,2,3,6,7]
+			item3:[3,4,7,3,4,5],
+			item4:[5,2,4,6,2,5]
 		}
 		function convertData (data) {
 			var result = [];
@@ -25,6 +25,7 @@
 				var obj = {};
 				obj.name = item;
 				obj.data = data[item];
+				obj.silent = true;
 				result.push(obj);
 			}
 			return result;
@@ -37,7 +38,7 @@
 				},
 			 	//x轴
 			 	xAxis:{
-			 		name:'月份',
+			 		name:'这里是x轴的名字',
 			 		data:['一月','二月','三月','四月','五月','六月']
 			 	},
 			 	yAxis:{
@@ -45,7 +46,11 @@
 			 	},
 			 	//核心数据，如果有legend组件的话，name需要和legend中的data对应
 				series:convertData(data)
-		},'shine');
+		});
+		myBar.dispatchAction({
+			type:'highlight',
+			seriesIndex:0
+		});
 		</script>
 	</body>
 </html>

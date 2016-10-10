@@ -21,14 +21,16 @@
 					text:'this is a pie Map'
 				},
 				legend:{
-					data:['iphone']
+					data:['name','name2','name3','name4','name5','name6'],
+					left:20,
+					top:20
 				},
 				series:[
 					{
 						label:{
 							normal:{
 								show:true,
-								position:'inside'
+								position:'outside'
 							}
 						},
 						data:[
@@ -40,10 +42,7 @@
 							{name:'name6',value:290}
 						]
 					}
-				],
-				legend:{
-					data:['name','name2','name3','name4','name5','name6']
-				}
+				]
 			});
 			window.addEventListener('resize',function () {
 				myPie.resize();
