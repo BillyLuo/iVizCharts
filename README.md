@@ -1,2 +1,0 @@
-# iVizCharts
-a chart
