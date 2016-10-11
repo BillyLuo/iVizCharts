@@ -105,28 +105,12 @@
 			    ]
 			};
 			//实例化一个关系图
+			var myPieMap = iVizCharts.graph(document.getElementById('test'));
 			var myPieMap = iVizCharts.graph(document.getElementById('test'),option);
 		</script>
-		<input type="range" min="0" max="1000" step="1" id="range" value="0" style="width: 500px;display: block;"/><span id="show">0</span>
 	</body>
 </html>
 
-<script type="text/javascript">
-	var x = 0;
-	var show = document.getElementById('show');
-	function add () {
-		x += 1;
-		if(x>1000){
-			return ;
-		}
-		range.value = x;
-		show.innerHTML = x/10 +'%';
-		requestAnimationFrame(add);
-	}
-	show.onclick = function () {
-		requestAnimationFrame(add);
-	}
-</script>
 
 
 

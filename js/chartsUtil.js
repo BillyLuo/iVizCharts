@@ -82,13 +82,15 @@
 			       },
 		    //y轴数据
 		    yAxis : {
-			            type : 'value',
 			            data:[]
 			        },
 		    //核心数据
-		    series : []
+		    series : [{
+		    	type:'bar'
+		    }]
 		}
-		if(option.series){
+		//如果没有图例，可根据series里面的name自动设置
+		if(option && option.series){
 			if(!option.legend) {
 				option.legend = {};
 			}
@@ -105,11 +107,15 @@
 				}
 			}
 		}else{
-			console.log('can not find series')
+			console.log('can not find option.series')
 		}
 		var myTheme = theme || 'default';
 		var myChart = iViz.init(container,myTheme);
-		if(option){
+		if(!option){
+			console.log('can not find option');
+			myChart.setOption(defaultOption);
+			return myChart;
+		}else{
 			//初始化图表
 			myChart.setOption(defaultOption);
 			if(!option.xAxis.nameGap && option.xAxis.name){
@@ -120,8 +126,6 @@
 			}
 			//根据传入的数据刷新图表
 			myChart.setOption(option);
-		}else{
-			console.log('can not find option');
 		}
 		//设置返回值为建立的图表
 		return myChart;
@@ -139,21 +143,15 @@
 				data:[],
 				left:'right'
 			},
-		    xAxis : [
-		        {
-		            type : 'category',
-        			boundaryGap: false,
-		            data : []
-		        }
-		    ],
-		    yAxis : [
-		        {
-		            type : 'value'
-		        }
-		    ],
+			xAxis:{
+				data:[]
+			},
+			yAxis:{
+				
+			},
 		    series : []
 		}
-		if(option.series){
+		if(option && option.series){
 			if(!option.legend){
 				option.legend = {};
 				option.legend.data = [];
@@ -175,7 +173,11 @@
 		
 		var myTheme = theme || 'default';
 		var myChart = iViz.init(container,myTheme);
-		if(option){
+		if(!option){
+			console.log('option can not be find');
+			defaultOption.series[0].type = "line";
+			myChart.setOption(defaultOption);
+		}else{
 			myChart.setOption(defaultOption);
 			if(!option.xAxis.nameGap && option.xAxis.name){
 				option.xAxis.nameGap = myxAxis.setxAxisNameGap(option.xAxis.name);
@@ -184,8 +186,6 @@
 				option.xAxis.nameLocation = myxAxis.setxAxisNameLocation(option.xAxis.name);
 			}
 			myChart.setOption(option);
-		}else{
-			console.log('option can not be find')
 		}
 		return myChart;
 	}
@@ -208,9 +208,11 @@
 		        orient: 'vertical',
 		        left: 'right'
 		    },
-		    series : []
+		    series : [{
+		    	type:'pie'
+		    }]
 		}
-		if(option.series){
+		if(option && option.series){
 			var series = option.series;
 			for(var prop in series){
 				if(!series[prop]['type']){
@@ -223,6 +225,13 @@
 		
 		var myTheme = theme || 'default';
 		var myChart = iViz.init(container,myTheme);
+		if(!option) {
+			var option = {
+				series:[{
+					type:'pie'
+				}]
+			}
+		}
 		if(option){
 			myChart.setOption(defaultOption);
 			myChart.setOption(option);
@@ -268,7 +277,7 @@
 		    },
 		    series : []
 		}
-		if(option.series){
+		if(option && option.series){
 			var series = option.series;
 			for(var prop in series){
 				if(!series[prop]['type']){
@@ -281,11 +290,12 @@
 		
 		var myTheme = theme || 'default';
 		var myChart = iViz.init(container,myTheme);
-		if(option){
+		if(!option){
+			console.log('option can not be find');
+			myChart.setOption(defaultOption);
+		}else{
 			myChart.setOption(defaultOption);
 			myChart.setOption(option);
-		}else{
-			console.log('option can not be find');
 		}
 		return myChart;
 	}
@@ -305,9 +315,11 @@
                     shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
        		},
-		    series : []
+		    series : [{
+		    	type:'map'
+		    }]
 		}
-		if(option.series){
+		if(option && option.series){
 			var series = option.series;
 			for(var prop in series){
 				//设置地图图表的类型
@@ -340,16 +352,22 @@
 		
 		var myTheme = theme || 'default';
 		var myChart = iViz.init(container,myTheme);
-		if(option){
+		if(!option){
+			console.log('option can not be find');
+			myChart.setOption(defaultOption);
+		}else{
 			myChart.setOption(defaultOption);
 			myChart.setOption(option);
-		}else{
-			console.log('option can not be find');
 		}
 		return myChart;
 	}
 	//effectScatter(气泡图);
 	iViz.effectScatter = function (container,option,theme) {
+		var myTheme = theme || 'default';
+		var myChart = iViz.init(container,myTheme);
+		if(!option) {
+			return myChart;
+		}
 		var defaultOption = {
 			title:myTitle,
 		    tooltip : {
@@ -362,12 +380,14 @@
                     shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
        		},
+       		xAxis:{},
+       		yAxis:{},
    			tooltip: {
 				trigger: 'item'
 			},
-		    series : []
+		    series : [{type:'effectScatter'}]
 		}
-		if(option.series){
+		if(option && option.series){
 			var series = option.series;
 			for(var prop in series){
 				//设置series里面第一组数据的类型为effecScatter（散点图）；
@@ -384,8 +404,6 @@
 		}else {
 			console.log('series can not be find');
 		}
-		var myTheme = theme || 'default';
-		var myChart = iViz.init(container,myTheme);
 		if(option){
 			myChart.setOption(defaultOption);
 			myChart.setOption(option);
@@ -397,6 +415,11 @@
 	
 	//radar(雷达图)
 	iViz.radar = function (container,option,theme) {
+		var myTheme = theme || 'default';
+		var myChart = iViz.init(container,myTheme);
+		if(!option) {
+			return myChart;
+		}
 		var defaultOption = {
 			title:myTitle,
 		    tooltip : {
@@ -409,9 +432,9 @@
                     shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
        		},
-		    series : []
+		    series : [{type:'radar'}]
 		}
-		if(option.series){
+		if(option && option.series){
 			var series = option.series;
 			for(var prop in series){
 				if(!series[prop]['type']){
@@ -422,8 +445,6 @@
 			console.log('series can not be find');
 		}
 		
-		var myTheme = theme || 'default';
-		var myChart = iViz.init(container,myTheme);
 		if(option){
 			myChart.setOption(defaultOption);
 			myChart.setOption(option);
@@ -435,10 +456,15 @@
 	
 	//graph(关系图)
 	iViz.graph = function (container,option,theme) {
+		var myTheme = theme || 'default';
+		var myChart = iViz.init(container,myTheme);
+		if(!option){
+			return myChart;
+		}
 		var defaultOption = {
-			series:[]
+			series:[{type:'graph'}]
 		};
-		if(option.series) {
+		if(option && option.series) {
 			var series = option.series;
 			for(var prop in series){
 				if(!series[prop]['type']){
@@ -448,8 +474,7 @@
 		}else{
 			console.log('can not find options')
 		}
-		var myTheme = theme || 'default';
-		var myChart = iViz.init(container,myTheme);
+		
 		if(option){
 			myChart.setOption(defaultOption);
 			myChart.setOption(option);
@@ -461,15 +486,20 @@
 	
 	//funnel(漏斗图)
 	iViz.funnel = function (container,option,theme) {
+		var myTheme = theme || 'default';
+		var myChart = iViz.init(container,myTheme);
+		if(!option) {
+			return myChart;
+		}
 		var defaultOption = {
 			title:myTitle,
 			tooltip: {
 		        trigger: 'item',
 		        formatter: "{a} <br/>{b} : {c}%"
 		    },
-			series:[]
+			series:[{type:'funnel'}]
 		};
-		if(option.series) {
+		if(option && option.series) {
 			var series = option.series;
 			for(var prop in series){
 				if(!series[prop]['type']){
@@ -479,8 +509,7 @@
 		}else{
 			console.log('can not find options')
 		}
-		var myTheme = theme || 'default';
-		var myChart = iViz.init(container,myTheme);
+		
 		if(option){
 			myChart.setOption(defaultOption);
 			myChart.setOption(option);
@@ -492,13 +521,18 @@
 	
 	//gauge(仪表盘图)；
 	iViz.gauge = function (container,option,theme) {
+		var myTheme = theme || 'default';
+		var myChart = iViz.init(container,myTheme);
+		if(!option) {
+			return myChart;
+		}
 		var defaultOption = {
 			tooltip : {
 		        trigger:'item'
 		    },
-			series:[]
+			series:[{type:'gauge'}]
 		};
-		if(option.series) {
+		if(option && option.series) {
 			var series = option.series;
 			for(var prop in series){
 				if(!series[prop]['type']){
@@ -508,8 +542,7 @@
 		}else{
 			console.log('can not find option')
 		}
-		var myTheme = theme || 'default';
-		var myChart = iViz.init(container,myTheme);
+		
 		if(option){
 			myChart.setOption(defaultOption);
 			myChart.setOption(option);
@@ -522,10 +555,13 @@
 	iViz.heatmap = function (container,option,theme) {
 		var myTheme = theme || 'default';
 		var myChart = iViz.init(container,myTheme);
+		if(!option) {
+			return myChart;
+		}
 		var defaultOption = {
 			series:[]
 		};
-		if(option.series) {
+		if(option && option.series) {
 			var series = option.series;
 			for(var prop in series) {
 				if(!series[prop]['type']){
@@ -545,10 +581,13 @@
 	iViz.candlestick = function (container,option,theme) {
 		var myTheme = theme || 'default';
 		var myChart = iViz.init(container,myTheme);
+		if(!option) {
+			return myChart;
+		}
 		var defaultOption = {
 			series:[]
 		};
-		if(option.series) {
+		if(option && option.series) {
 			var series = option.series;
 			for(var prop in series) {
 				if(!series[prop]['type']){
@@ -569,10 +608,13 @@
 	iViz.treemap = function (container,option,theme) {
 		var myTheme = theme || 'default';
 		var myChart = iViz.init(container,myTheme);
+		if(!option) {
+			return myChart;
+		}
 		var defaultOption = {
 			series:[]
 		};
-		if(option.series) {
+		if(option && option.series) {
 			var series = option.series;
 			for(var prop in series) {
 				if(!series[prop]['type']){
