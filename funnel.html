@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title></title>
+		<title>漏斗图</title>
 		<script src="js/iVizCharts.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/chartsUtil.js" type="text/javascript" charset="utf-8"></script>
 	</head>
@@ -11,33 +11,40 @@
 		<script type="text/javascript">
 			var option = {
 			    title: {
-			        text: 'this is a funnel(漏斗)chart',
-			        subtext: '纯属虚构，如有雷同，纯属巧合',
-			        left:'center'
+			        text: '漏斗图',
+			        subtext: '纯属虚构'
+			    },
+			    tooltip: {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b} : {c}%"
 			    },
 			    legend: {
-			        data: ['周一','周二','周三','周四','周五'],
+			        data: ['展现','点击','访问','咨询','订单'],
 			        orient:'vertical',
-			        left:'10%',
-			        top:'10%'
+			        top:75,
+			       	right:20,
 			    },
 			    calculable: true,
 			    series: [
 			        {
-			            name:'电影',
-			            left: 'center',
+			            name:'漏斗图',
+			            type:'funnel',
+			            left: '10%',
+			            top: 60,
 			            //x2: 80,
-			            bottom: 10,
-			            width: '80%',
+			            bottom: 60,
+			            width: '70%',
 			            // height: {totalHeight} - y - y2,
+			            min: 0,
+			            max: 100,
 			            minSize: '0%',
-			            maxSize: '80%',
+			            maxSize: '100%',
 			            sort: 'descending',
 			            gap: 2,
 			            label: {
 			                normal: {
 			                    show: true,
-			                    position: 'right'
+			                    position: 'inside'
 			                },
 			                emphasis: {
 			                    textStyle: {
@@ -57,65 +64,20 @@
 			            itemStyle: {
 			                normal: {
 			                    borderColor: '#fff',
-			                    opacity: 0.5
+			                    borderWidth: 1
 			                }
 			            },
 			            data: [
-			                {value: 20, name: '周一'},
-			                {value: 40, name: '周二'},
-			                {value: 60, name: '周三'},
-			                {value: 80, name: '周四'},
-			                {value: 100, name: '周五'}
-			            ]
-			        },
-			        {
-			            name:'电视',
-			            left: 'center',
-			            //x2: 80,
-			            bottom: 10,
-			            width: '50%',
-			            // height: {totalHeight} - y - y2,
-			            minSize: '0%',
-			            maxSize: '80%',
-			            sort: 'descending',
-			            gap: 2,
-			            label: {
-			                normal: {
-			                    show: true,
-			                    position: 'center',
-			                    formatter:'{b}'
-			                },
-			                emphasis: {
-			                    textStyle: {
-			                        fontSize: 20
-			                    }
-			                }
-			            },
-			            labelLine: {
-			                normal: {
-			                    length: 10,
-			                    lineStyle: {
-			                        width: 1,
-			                        type: 'solid'
-			                    }
-			                }
-			            },
-			            itemStyle: {
-			                normal: {
-			                    borderColor: '#fff',
-			                    opacity: 0.8
-			                }
-			            },
-			            data: [
-			                {value: 9, name: '周一'},
-			                {value: 15, name: '周二'},
-			                {value: 30, name: '周三'},
-			                {value: 37, name: '周四'},
-			                {value: 58, name: '周五'}
+			                {value: 60, name: '访问'},
+			                {value: 40, name: '咨询'},
+			                {value: 20, name: '订单'},
+			                {value: 80, name: '点击'},
+			                {value: 100, name: '展现'}
 			            ]
 			        }
 			    ]
 			};
+
 			var myFunnel = iVizCharts.funnel(document.getElementById('test'),option)
 		</script>
 	</body>

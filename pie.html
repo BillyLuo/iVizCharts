@@ -50,3 +50,15 @@
 		</script>
 	</body>
 </html>
+
+<script>
+	var a = (function () {
+		var ab = 1;
+		return function () {
+			ab ++;
+			console.log(ab);
+		}
+	})();
+	a();
+	a();
+</script>

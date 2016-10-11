@@ -13,15 +13,15 @@ var lineCharts = iVizCharts.line(document.getElementById('test'),{
 	yAxis:{
 		name:'这是y轴标题',
 		//隐藏y坐标轴
-//					axisLine:{
-//						show:false
-//					},
-//					axisTick:{
-//						show:false
-//					},
-//					axisLabel:{
-//						show:false
-//					}
+//		axisLine:{
+//			show:false
+//		},
+//		axisTick:{
+//			show:false
+//		},
+//		axisLabel:{
+//			show:false
+//		}
 	},
 	series:[
 		{
@@ -35,7 +35,7 @@ var lineCharts = iVizCharts.line(document.getElementById('test'),{
 					position:'bottom'
 				}
 			},
-//						symbol:'none',
+//			symbol:'none',
 			smooth:true,
 			areaStyle:{normal:{}}
 		},
@@ -44,7 +44,7 @@ var lineCharts = iVizCharts.line(document.getElementById('test'),{
 			data:[
 				2,4,5,7,8
 			],
-//						symbol:'none',
+//			symbol:'none',
 			smooth:true,
 			areaStyle:{normal:{}}
 		}

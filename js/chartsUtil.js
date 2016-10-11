@@ -137,8 +137,7 @@
 		    },
 		    legend:{
 				data:[],
-				left:'right',
-				orient:'vertical'
+				left:'right'
 			},
 		    xAxis : [
 		        {
@@ -155,8 +154,10 @@
 		    series : []
 		}
 		if(option.series){
-			option.legend = {};
-			option.legend.data = [];
+			if(!option.legend){
+				option.legend = {};
+				option.legend.data = [];
+			}
 			var series = option.series;
 			for(var prop in series){
 				if(!series[prop]['name']){
@@ -194,8 +195,7 @@
 		var defaultOption = {
 			title:myTitle,
 		    tooltip : {
-		    	trigger:'item',
-		        formatter: "{c},({d}%)"
+		    	trigger:'item'
 		    },
 		    itemStyle: {
                 emphasis: {
@@ -206,14 +206,9 @@
            },
            legend: {
 		        orient: 'vertical',
-		        left: 'left'
+		        left: 'right'
 		    },
-		    series : [
-		        {
-		            type:'pie',
-		            data:[]
-		        }
-		    ]
+		    series : []
 		}
 		if(option.series){
 			var series = option.series;
@@ -467,6 +462,7 @@
 	//funnel(漏斗图)
 	iViz.funnel = function (container,option,theme) {
 		var defaultOption = {
+			title:myTitle,
 			tooltip: {
 		        trigger: 'item',
 		        formatter: "{a} <br/>{b} : {c}%"
