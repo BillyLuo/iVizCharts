@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="js/iVizCharts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chartsUtil.js"></script>
+		<script src="js/world.js"></script>
+		<title></title>
+	</head>
+	<body>
+		<div id="test" style="width: 1000px;height: 600px;"></div>
+		
+		<script type="text/javascript">
+			var myWorldMap = iVizCharts.init(document.getElementById('test'));
+			myWorldMap.setOption({
+				title:{
+					left:'center',
+					text:'世界地图',
+					subtext:'需要引入world.js或者world.json'
+				},
+				legend:{
+					data:['world map'],
+					left:'right',
+					y:30,
+					formatter:'模拟数据',
+					textStyle:{
+						color:'#f00',
+						fontSize:16
+					}
+				},
+				backgroundColor:'#eee',
+				tooltip:{
+					formatter:'{b}:{c}'
+				},
+				 series: [
+					 {
+					 	name:'world map',
+				        type: 'map',
+				        map: 'world',
+				        roam:true,
+				        itemStyle:{
+							normal:{
+								areaColor:'#3BA7DC',
+								borderColor:'#fff',
+								opacity:0.6
+							},
+							emphasis:{
+								areaColor:'#4BA7DC',
+								borderColor:'#fff',
+								opacity:1
+							}
+						},
+				        scaleLimit:{
+				        	min:0.8,
+				        	max:10
+				        },
+					    data:[
+					    	{
+					    		name:'China',
+					    		value:'13'
+					    	},
+					    	{
+					    		name:'Russia',
+					    		value:'6'
+					    	},
+					    	{
+					    		name:'United States of America',
+					    		value:'3.5'
+					    	},
+					    	{
+					    		name:'Australia',
+					    		value:'0.2'
+					    	},
+					    	{
+					    		name:'Canada',
+					    		value:1
+					    	}
+					    ]
+				    }
+				 ]
+			});
+		</script>
+	</body>
+</html>

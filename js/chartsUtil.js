@@ -2,9 +2,11 @@
 //description:
 //图表类型(bar(柱形),line(折线),pie(饼图),scatter(散点图),map(地图),radar(雷达图),graph(关系图),funnel(漏斗图),gauge(仪表盘图),heatmap(热力图),candlestick(k线图));
 //自定义的方法参数说明：
-//var myChart = iViz.line(container,option,theme);
+//var myChart = iVizCharts.line(container,option,theme);
 //1.必须参数，container(element，图表的容器)，option(object，图表数据核心对象)
 //2.可选参数   theme(string，图表主题，使用时必须先引入相应theme的js文件)
+//option对象传入时，series中的type已经动态添加，可不必重复声明
+
 
 //图表方法说明：
 //1.方法中的所有参数都是可以改动的，但必须保证一些必须的默认参数
@@ -85,9 +87,7 @@
 					data: []
 				},
 				//核心数据
-				series: [{
-					type: 'bar'
-				}]
+				series: []
 			}
 			//如果没有图例，可根据series里面的name自动设置
 		if(option && option.series) {
@@ -112,8 +112,6 @@
 		var myTheme = theme || 'default';
 		var myChart = iViz.init(container, myTheme);
 		if(!option) {
-			console.log('can not find option');
-			myChart.setOption(defaultOption);
 			return myChart;
 		} else {
 			//初始化图表
@@ -174,9 +172,6 @@
 		} else {
 			console.log('can not find series')
 		}
-
-		var myTheme = theme || 'default';
-		var myChart = iViz.init(container, myTheme);
 		if(!option) {
 			return myChart;
 		} else {
@@ -289,7 +284,6 @@
 		}
 		if(!option) {
 			console.log('option can not be find');
-			myChart.setOption(defaultOption);
 		} else {
 			myChart.setOption(defaultOption);
 			myChart.setOption(option);
