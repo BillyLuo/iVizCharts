@@ -1,4 +1,4 @@
-//version:0.1
+//version:0.0.1
 //description:
 //图表类型(bar(柱形),line(折线),pie(饼图),scatter(散点图),map(地图),radar(雷达图),graph(关系图),funnel(漏斗图),gauge(仪表盘图),heatmap(热力图),candlestick(k线图));
 //自定义的方法参数说明：
